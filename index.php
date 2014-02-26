@@ -4,6 +4,10 @@ $token = $_GET['token'];
 
 $response = array();
 
+header('Content-Type: application/json');
+
+error_reporting(0);
+
 if(isset($token) && !empty($token) && 'token' == $token){
 
 	$filename = "example.json";
@@ -14,20 +18,16 @@ if(isset($token) && !empty($token) && 'token' == $token){
 
 	fclose($handle);
 
-	$response['err'] = 0;
-
-	$response['data'] = $contents;
-
-	$response['msg'] = 'Here you go';
+	echo $contents;exit;
 
 }else{
 	$response['err'] = 1;
 
 	$response['msg'] = 'Token is required';
+	echo json_encode($response);exit;
+
 }
 
-header('Content-type: application/json');
 
-echo json_encode($response);exit;
 
 ?>
