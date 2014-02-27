@@ -18,16 +18,14 @@ if(isset($token) && !empty($token) && 'token' == $token){
 
 	fclose($handle);
 
-	echo $contents;exit;
+	echo json_encode(json_decode($contents),JSON_PRETTY_PRINT);
 
 }else{
 	$response['err'] = 1;
 
 	$response['msg'] = 'Token is required';
-	echo json_encode($response);exit;
+	echo json_encode($response,JSON_PRETTY_PRINT);
 
 }
-
-
-
+exit;
 ?>
