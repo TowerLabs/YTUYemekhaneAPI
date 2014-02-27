@@ -31,21 +31,24 @@ class YemekhaneAPI:
 		
 		date 		= parser_obj('div#menu_header div:first').html()
 
-		main_lunch 	= parser_obj('div#menu_container div#menu_slider div.one_menu div.one_lunchMainMenu').html()
+		root_lunch  = parser_obj('div#menu_container div#menu_slider div.one_menu')
 
-		alt_lunch 	= parser_obj('div#menu_container div#menu_slider div.one_menu div.one_lunchAltMenu').html()
+		main_lunch 	= root_lunch('div.one_lunchMainMenu').html()
 
-		main_dinner = parser_obj('div#menu_container div#menu_slider div.one_menu div.one_dinnerMainMenu').html()
+		alt_lunch 	= root_lunch('div.one_lunchAltMenu').html()
 
-		alt_dinner  = parser_obj('div#menu_container div#menu_slider div.one_menu div.one_dinnerAltMenu').html()
+		main_dinner = root_lunch('div.one_dinnerMainMenu').html()
+
+		alt_dinner  = root_lunch('div.one_dinnerAltMenu').html()
 
 		foods = {"main_lunch":self.replace_tags(main_lunch),"alt_lunch":self.replace_tags(alt_lunch),"main_dinner":self.replace_tags(main_dinner),"alt_dinner":self.replace_tags(alt_dinner)}		
 
 		self.yemekler.append({date:foods})
 
 	def replace_tags(self,str):
+
 		try:
-			return str.replace("<br/>","").replace("<br/ >","").replace("<br />","")
+			return str.replace("<br/>",",").replace("<br/ >",",").replace("<br />",",").rstrip(',')
 		except:
 			return ""
 
