@@ -56,7 +56,8 @@ class YemekhaneAPI:
 		return json.dumps(self.yemekler)
 	
 	def write_json(self):
-		os.remove("example.json")
+		if os.path.isfile("example.json"):
+			os.remove("example.json")
 		file = open("example.json",'w+')
 		file.write(json.dumps(self.yemekler))
 		file.close()
