@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from pyquery import PyQuery as pq 
-import datetime, cgi, json
+import datetime, cgi, json, os
 
 class YemekhaneAPI:	
 
@@ -56,6 +56,7 @@ class YemekhaneAPI:
 		return json.dumps(self.yemekler)
 	
 	def write_json(self):
+		os.remove("example.json")
 		file = open("example.json",'w+')
 		file.write(json.dumps(self.yemekler))
 		file.close()
