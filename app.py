@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-#!/usr/bin/python
+#  -*- coding: utf-8 -*-
 from __future__ import print_function
 from pyquery import PyQuery as pq
 import datetime
@@ -37,7 +36,7 @@ class YemekhaneAPI:
             "alt_lunch": self.replace_tags(alt_lunch),
             "main_dinner": self.replace_tags(main_dinner),
             "alt_dinner": self.replace_tags(alt_dinner)
-            }
+        }
         self.foods.append({date: one_day})
 
     def replace_tags(self, str):
@@ -52,7 +51,7 @@ class YemekhaneAPI:
 
     def return_json(self):
         return json.dumps(self.foods)
-	
+
     def write_json(self):
         if os.path.isfile("example.json"):
             os.remove("example.json")
