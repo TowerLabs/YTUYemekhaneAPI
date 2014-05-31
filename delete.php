@@ -24,26 +24,25 @@ ini_set("error_log", "./logs/delete.log");
 
 try
 {
-	$dir      = '.';
-	$files    = glob('./*.flist', GLOB_BRACE);
-	sort($files);
-	$filename = array_pop($files);
+    $dir      = '.';
+    $files    = glob('./*.flist', GLOB_BRACE);
+    sort($files);
+    $filename = array_pop($files);
 
-	if(sizeof($files))
-	{
-
-		foreach ($files as $file)
-		{
-			$realpath = realpath($file);
-			if(is_readable($realpath))
-			{
-				unlink($realpath);
-			}
-		}
-	}
+    if(sizeof($files))
+    {
+        foreach ($files as $file)
+        {
+            $realpath = realpath($file);
+            if(is_readable($realpath))
+            {
+                unlink($realpath);
+            }
+        }
+    }
 }
 catch(Exception $e)
 {
-	error_log( $e->getMessage() );
+    error_log( $e->getMessage() );
 }
 ?>

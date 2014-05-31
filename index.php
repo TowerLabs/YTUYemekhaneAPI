@@ -30,29 +30,29 @@ ini_set("error_log", "./logs/error.log");
 
 if(isset($token) && !empty($token) && 'token' == $token)
 {
-	try
-	{
-		$dir      = '.';
-		$files    = glob('./*.flist', GLOB_BRACE);
-		sort($files);
-		$filename = array_pop($files);
-		
-		$handle   = fopen($filename, "r");	
-		$contents = fread($handle, filesize($filename));
+    try
+    {
+        $dir      = '.';
+        $files    = glob('./*.flist', GLOB_BRACE);
+        sort($files);
+        $filename = array_pop($files);
 
-		fclose($handle);
-		echo json_encode(json_decode($contents),JSON_PRETTY_PRINT);
+        $handle   = fopen($filename, "r");	
+        $contents = fread($handle, filesize($filename));
+
+        fclose($handle);
+        echo json_encode(json_decode($contents),JSON_PRETTY_PRINT);
 	}
-	catch(Exception $e)
-	{
-		error_log( $e->getMessage() );
-	}	
+    catch(Exception $e)
+    {
+        error_log( $e->getMessage() );
+    }
 }
 else
 {
-	$response['err'] = 1;
-	$response['msg'] = 'Token is required';
-	echo json_encode($response,JSON_PRETTY_PRINT);
+    $response['err'] = 1;
+    $response['msg'] = 'Token is required';
+    echo json_encode($response,JSON_PRETTY_PRINT);
 }
 exit;
 ?>
