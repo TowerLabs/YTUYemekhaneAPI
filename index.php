@@ -25,25 +25,34 @@ $response = array();
 header('Content-Type: application/json');
 
 error_reporting(0);
+ini_set("log_errors", 1);
+ini_set("error_log", "./logs/error.log");
 
-if(isset($token) && !empty($token) && 'token' == $token){
+if(isset($token) && !empty($token) && 'token' == $token)
+{
+	try
+	{
+		$dir      = '.';
+		$files    = glob('./*.flist', GLOB_BRACE);
+		sort($files);
+		$filename = array_pop($files);
+		
+		$handle   = fopen($filename, "r");	
+		$contents = fread($handle, filesize($filename));
 
-	$filename = "example.json";
-	
-	$handle = fopen($filename, "r");
-	
-	$contents = fread($handle, filesize($filename));
-
-	fclose($handle);
-
-	echo json_encode(json_decode($contents),JSON_PRETTY_PRINT);
-
-}else{
+		fclose($handle);
+		echo json_encode(json_decode($contents),JSON_PRETTY_PRINT);
+	}
+	catch(Exception $e)
+	{
+		error_log( $e->getMessage() );
+	}	
+}
+else
+{
 	$response['err'] = 1;
-
 	$response['msg'] = 'Token is required';
 	echo json_encode($response,JSON_PRETTY_PRINT);
-
 }
 exit;
 ?>

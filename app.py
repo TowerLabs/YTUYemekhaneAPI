@@ -20,6 +20,7 @@ Fifth Floor, Boston, MA  02110-1301, USA.
 from __future__ import print_function
 from pyquery import PyQuery as pq
 import datetime
+import time
 import cgi
 import json
 import os
@@ -71,9 +72,7 @@ class YemekhaneAPI:
         return json.dumps(self.foods)
 
     def write_json(self):
-        if os.path.isfile("example.json"):
-            os.remove("example.json")
-        file = open("example.json", 'w+')
+        file = open(str(int(time.time()))+'.flist', 'w+')
         file.write(json.dumps(self.foods))
         file.close()
 
