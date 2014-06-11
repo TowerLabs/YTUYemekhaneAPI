@@ -24,7 +24,7 @@ ini_set("error_log", "./logs/delete.log");
 try
 {
     $dir      = dirname(__FILE__);    
-    $files    = glob('./*.flist', GLOB_BRACE);
+    $files    = glob($dir.'/*.flist', GLOB_BRACE);
     sort($files);
     $filename = array_pop($files);
 
