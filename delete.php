@@ -17,14 +17,13 @@ along with this program; if not, write to the
 Free Software Foundation, Inc., 51 Franklin Street,
 Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
 error_reporting(0);
 ini_set("log_errors", 1);
 ini_set("error_log", "./logs/delete.log");
 
 try
 {
-    $dir      = '.';
+    $dir      = dirname(__FILE__);    
     $files    = glob('./*.flist', GLOB_BRACE);
     sort($files);
     $filename = array_pop($files);
