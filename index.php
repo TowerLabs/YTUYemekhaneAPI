@@ -32,8 +32,8 @@ if(isset($token) && !empty($token) && 'token' == $token)
 {
     try
     {
-        $dir      = '.';
-        $files    = glob('./*.flist', GLOB_BRACE);
+        $dir      = dirname(__FILE__);
+        $files    = glob($dir.'/*.flist', GLOB_BRACE);
         sort($files);
         $filename = array_pop($files);
 
