@@ -72,7 +72,8 @@ class YemekhaneAPI:
         return json.dumps(self.foods)
 
     def write_json(self):
-        file = open(str(int(time.time()))+'.flist', 'w+')
+        dir = os.path.dirname(os.path.abspath(__file__))
+        file = open(dir+'/'+str(int(time.time()))+'.flist', 'w+')
         file.write(json.dumps(self.foods))
         file.close()
 
